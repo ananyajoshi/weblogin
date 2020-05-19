@@ -29,8 +29,13 @@ export class LoginComponentComponent implements OnInit {
           this.router.navigate(['home']);
 
         }
+        else if(res["verification"]=="User not valid"){
+          console.log("Invalid username ");
+          this.router.navigate(['alert']);
+          //window.location.reload();
+        }
         else {
-          console.log("invalid username or password");
+          console.log("Invalid password");
         }
       },
         error => {

@@ -7,6 +7,7 @@ import { HeaderComponentComponent } from './header-component/header-component.co
 import { HomeComponent } from './home/home.component';
 import { RouterModule , Routes } from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {NgbdAlertBasic} from '../app/alert/alert';
 const appRoutes: Routes = [
   {
       path:'',
@@ -15,6 +16,10 @@ const appRoutes: Routes = [
   {
     path:'home',
     component: HomeComponent
+  },
+  {
+    path:'alert',
+    component: NgbdAlertBasic
   }
 ];
 
@@ -23,7 +28,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponentComponent,
     HeaderComponentComponent,
-    HomeComponent
+    HomeComponent,
+    NgbdAlertBasic,
   ],
   imports: [
     BrowserModule,

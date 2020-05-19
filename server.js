@@ -33,20 +33,36 @@ app.post("/web/chk",(req,res)=>{
     let pwd = req.body.pwd;
 
     
-    let sql = `select PASSWORD FROM admin_table WHERE USER_NAME = ?`;
-    
+    let sql1 = `select count(*) as count FROM admin_table WHERE USER_NAME = ?`;
+    let sql=`select PASSWORD FROM admin_table WHERE USER_NAME = ?`;
     let values = [usrNm];
-    mysqlConnection.query(sql,values,(err,result)=>{
-        if(err) throw err;
-        console.log(result);
-        console.log("checking password for "+usrNm);
-        console.log(pwd);
-          if(result[0].PASSWORD==pwd){
-              res.status(200).send({verification : 'Verified'})
-          }else{
-              res.status(200).send({verification : 'Not Verified'})
-          }
-      });     
+
+    mysqlConnection.query(sql1,values,(err,result)=>{
+       
+    
+        if(result[0].count==1){
+            console.log('user exists');
+
+            mysqlConnection.query(sql,values,(err,result)=>{
+        
+    
+                console.log(result);
+                console.log("checking password for "+usrNm);
+                console.log(pwd);
+                  if(result[0].PASSWORD==pwd){
+                      res.status(200).send({verification : 'Verified'})
+                  }else{
+                      res.status(200).send({verification : 'Not Verified'})
+                  }
+            });     
+        }
+       else{
+        res.status(200).send({verification : 'User not valid'})
+       }
+       
+    });     
+
+   
 }); 
 
 
