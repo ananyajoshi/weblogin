@@ -22,7 +22,7 @@ mysqlConnection.connect((err) => {
 
 });
 
-
+//WEB PORTAL --LOGIN PAGE
 
 //username and password
 app.post("/web/chk",(req,res)=>{
